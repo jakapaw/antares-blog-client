@@ -3,31 +3,42 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Quicksand';
-  src: url('/fonts/Quicksand');
+  font-family: "Quicksand";
+  src: url("/fonts/Quicksand.ttf");
 }
 
 @font-face {
-  font-family: 'Nunito';
-  src: url('/fonts/Nunito');
+  font-family: "Nunito";
+  src: url("/fonts/Nunito.ttf");
 }
 
 @font-face {
-  font-family: 'Nunito-Italic';
-  src: url('/fonts/Nunito-Italic');
+  font-family: "Nunito-Italic";
+  src: url("/fonts/Nunito-Italic.ttf");
 }
 
 html {
-  font-family: 'Quicksand', 'Nunito', 'Arial';
+  font-family: "Quicksand", "Nunito", "Arial";
 }
 
-@theme {
-  --color-primary: #020A63;
-  --color-secondary: #FFE16A;
-  --color-onPrimary: #0047AB;
-  --text-black: #303030;
-  --text-white: #FFFFFF;
-  --font-quicksand: 'Quicksand';
-  --font-nunito: 'Nunito';
-  --font-nunitoItalic: 'Nunito-Italic';
+@layer base {
+  :root {
+    --color-primary: #020a63;
+    --color-secondary: #ffe16a;
+    --color-cobalt: #0047ab;
+    --color-black: #303030;
+    --color-white: #ffffff;
+    --font-quicksand: "Quicksand";
+    --font-nunito: "Nunito";
+    --font-nunitoItalic: "Nunito-Italic";
+  }
+  body {
+    color: var(--color-black)
+  }
+}
+
+@layer utilities {
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
 }

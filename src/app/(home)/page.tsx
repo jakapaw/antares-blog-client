@@ -1,10 +1,10 @@
+import TopicsOverview from "./TopicsOverview";
+
 export default function HomePage() {
   return (
     <>
       {/* <HeaderPrimary /> */}
-      <main>
-        {/* <TopicOverview /> */}
-      </main>
+      <TopicsOverview />
       {/* <FooterPrimary /> */}
     </>
   );
