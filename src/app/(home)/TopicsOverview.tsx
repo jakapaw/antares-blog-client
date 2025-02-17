@@ -2,12 +2,12 @@ import clsx from "clsx";
 
 export default function TopicsOverview() {
   return (
-    <div className="flex flex-col">
+    <main className="flex flex-col pl-2">
       <TopicGroup />
       <TopicGroup />
       <TopicGroup />
       <TopicGroup />
-    </div>
+    </main>
   );
 }
 

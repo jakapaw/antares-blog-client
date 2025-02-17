@@ -25,6 +25,7 @@ html {
   :root {
     --color-primary: #020a63;
     --color-secondary: #ffe16a;
+    --color-secondaryActive: #ffcc00;
     --color-cobalt: #0047ab;
     --color-black: #303030;
     --color-white: #ffffff;

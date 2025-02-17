@@ -11,6 +11,7 @@ export default {
       colors: {
         primary: 'var(--color-primary)',
         secondary: 'var(--color-secondary)',
+        secondaryActive: 'var(--color-secondaryActive)',
         cobalt: 'var(--color-cobalt)',
         black: 'var(--color-black)',
         white: 'var(--color-white)',

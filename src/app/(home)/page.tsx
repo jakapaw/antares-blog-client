@@ -1,9 +1,10 @@
+import HomeHeader from "./HomeHeader";
 import TopicsOverview from "./TopicsOverview";
 
 export default function HomePage() {
   return (
     <>
-      {/* <HeaderPrimary /> */}
+      <HomeHeader />
       <TopicsOverview />
       {/* <FooterPrimary /> */}
     </>
