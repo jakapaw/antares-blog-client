@@ -5,7 +5,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-export default function HomeHeader() {
+export default function HeaderPrimary() {
   const [isSidebarActive, setIsSidebarActive] = useState(false);
 
   return (
@@ -27,11 +27,13 @@ function SearchBar() {
   const icon = useRef(null);
 
   useEffect(() => {
-    inputBar.current!.addEventListener('focusin', () => {
-      icon.current!.style.display = 'none';
+    const ibar: HTMLElement = inputBar.current!;
+    const ic: HTMLElement = icon.current!;
+    ibar.addEventListener('focusin', () => {
+      ic.style.display = 'none';
     });
-    inputBar.current!.addEventListener('focusout', () => {
-      icon.current!.style.display = 'inline';
+    ibar.addEventListener('focusout', () => {
+      ic.style.display = 'inline';
     });
   });
 
