@@ -1,4 +1,4 @@
-import { HomeIcon } from "@heroicons/react/24/solid";
+import HomeNavigationBar from "@/components/HomeNavigationBar";
 import Image from "next/image";
 import Link from "next/link";
 import TempProfile from "../../../public/profile-1.jpg";
@@ -13,7 +13,7 @@ export default function AuthorPage() {
         backgroundSize: 'cover',
         backgroundPosition: '50% 110%'
       }}>
-        <NavigationBar />
+        <HomeNavigationBar textStyle="text-white" />
         <Image src={TempProfile} alt="Profile Image" className="mt-2 self-center aspect-square object-cover rounded-full w-1/2"/>
         <span className="text-2xl text-white font-bold self-center">Frances Cordova</span>
       </div>
@@ -33,17 +33,6 @@ export default function AuthorPage() {
         </div>
       </div>
     </>
-  )
-}
-
-function NavigationBar() {
-  return (
-    <div>
-      <Link href="/">
-        <HomeIcon className="inline-block mr-2 size-8 bg-[#e9e9e9] p-1 text-cobalt rounded-sm"/>
-        <span className="text-sm underline text-white">Kembali ke Halaman Utama</span>
-      </Link>
-    </div>
   )
 }
 
