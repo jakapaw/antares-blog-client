@@ -32,16 +32,16 @@ function Card({
  }) {
   return (
     <div 
-      className="mr-2 flex flex-col flex-none justify-between basis-32 rounded-md shadow-md h-40"
+      className="mr-2 flex flex-col flex-none justify-between basis-32 rounded-md shadow-md h-40 *:bg-transparent"
       style={{backgroundImage: 'linear-gradient(#EFEFEF, white)'}}>
         <div 
           id="cardImage"
           className="inline-block w-full basis-1/3 rounded-t-md"
           style={{
-            background: 'no-repeat center/cover url("https://upload.wikimedia.org/wikipedia/commons/3/30/Lilium_candidum_1.jpg")',
+            background: 'no-repeat center/cover url("/card-image.png")',
             }}>
         </div>
-        <span className={clsx('p-2 bg-white basis-1/2 bg-transparent', title.length <= 50 ? 'text-[12px]' : 'text-[10px]')}>{title}</span>
+        <span className={clsx('p-2 basis-1/2', title.length <= 50 ? 'text-[12px]' : 'text-[10px]')}>{title}</span>
         <div className="p-2 flex justify-between text-[8px]">
           <span>Author Name</span>
           <span>Date</span>

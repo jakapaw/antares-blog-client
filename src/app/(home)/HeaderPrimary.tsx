@@ -1,47 +1,25 @@
 'use client'
 
-import { Bars3Icon, MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { SearchBar } from "@/components/SearchBar";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 export default function HeaderPrimary() {
   const [isSidebarActive, setIsSidebarActive] = useState(false);
 
   return (
-    <header className="flex flex-col items-center gap-3 px-5">
+    <header className="flex flex-col items-center gap-3 px-5 py-1">
       <span className="absolute left-4 top-4">
         <button className="bg-gray-100" onClick={() => setIsSidebarActive(true)}>
           <Bars3Icon className="size-8 text-cobalt" />
         </button>
       </span>
       <Image src={'/main_logo.svg'} alt="Antares Logo" width={130} height={130} />
-      <SearchBar />
+      <SearchBar className="h-8 w-full" isAutofocus={false}/>
       <Sidebar activeState={isSidebarActive} close={() => setIsSidebarActive(false)} />
     </header>
-  )
-}
-
-function SearchBar() {
-  const inputBar = useRef(null);
-  const icon = useRef(null);
-
-  useEffect(() => {
-    const ibar: HTMLElement = inputBar.current!;
-    const ic: HTMLElement = icon.current!;
-    ibar.addEventListener('focusin', () => {
-      ic.style.display = 'none';
-    });
-    ibar.addEventListener('focusout', () => {
-      ic.style.display = 'inline';
-    });
-  });
-
-  return (
-    <form action="" className="flex items-center pl-4 p-1 border border-slate-300 h-8 w-full rounded-full">
-      <MagnifyingGlassIcon ref={icon} className="size-5 mr-2 text-slate-400" />
-      <input ref={inputBar} type="text" className="outline-none font-light text-sm placeholder:text-base" placeholder="Search" />
-    </form>
   )
 }
 

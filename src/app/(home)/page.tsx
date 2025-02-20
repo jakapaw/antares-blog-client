@@ -1,5 +1,5 @@
-import FooterPrimary from "./FooterPrimary";
-import HeaderPrimary from "./HomePrimary";
+import FooterPrimary from "../../components/FooterPrimary";
+import HeaderPrimary from "./HeaderPrimary";
 import TopicsOverview from "./TopicsOverview";
 
 export default function HomePage() {
