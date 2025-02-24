@@ -1,12 +1,30 @@
+import { getAllCategory, getArticlesGroupByCategory } from "@/lib/data";
+import Article from "@/model/article";
+import Category from "@/model/category";
+import { Suspense } from "react";
 import FooterPrimary from "../../components/FooterPrimary";
 import HeaderPrimary from "./HeaderPrimary";
 import TopicsOverview from "./TopicsOverview";
 
+export type HomePageState = {
+  articles: Promise<Map<string, Article[]>>,
+  categories: Promise<Category[]>
+}
+
 export default function HomePage() {
+  const state: HomePageState = {
+    articles: getArticlesGroupByCategory(),
+    categories: getAllCategory()
+  }
+
   return (
     <div>
-      <HeaderPrimary />
-      <TopicsOverview />
+      <Suspense fallback={<div>Loading...</div>}>
+        <HeaderPrimary state={state}/>
+      </Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
+        <TopicsOverview state={state}/>
+      </Suspense>
       <FooterPrimary />
     </div>
   );

@@ -73,7 +73,6 @@ export async function getAllArticle(): Promise<Article[]> {
     `api/articles?populate=category&${queryString}`,
     BASE_URL
   );
-  console.log(url);
 
   return fetch(url)
     .then((response) => {

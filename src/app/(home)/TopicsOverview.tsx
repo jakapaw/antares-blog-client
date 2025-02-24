@@ -1,16 +1,18 @@
-import { getArticlesGroupByCategory } from "@/lib/data";
+'use client';
+
 import Article from "@/model/article";
 import clsx from "clsx";
 import Link from "next/link";
-import React from "react";
+import React, { use } from "react";
+import { HomePageState } from "./page";
 
 const BASE_URL = new URL(
   "/",
   process.env.CLIENT_URL || "http://localhost:3000"
 );
 
-export default async function TopicsOverview() {
-  const articles = await getArticlesGroupByCategory();
+export default function TopicsOverview({state}: {state: HomePageState}) {
+  const articles = use(state.articles);
 
   function renderTopics() {
     const result: React.ReactNode[] = [];

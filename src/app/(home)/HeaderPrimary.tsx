@@ -1,13 +1,16 @@
 'use client'
 
 import { SearchBar } from "@/components/SearchBar";
+import Category from "@/model/category";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import Image from "next/image";
-import { useState } from "react";
+import { use, useState } from "react";
+import { HomePageState } from "./page";
 
-export default function HeaderPrimary() {
+export default function HeaderPrimary({state}: {state: HomePageState}) {
   const [isSidebarActive, setIsSidebarActive] = useState(false);
+  const loaded = use(state.categories);
 
   return (
     <header className="flex flex-col items-center gap-3 px-5 py-1">
@@ -18,16 +21,18 @@ export default function HeaderPrimary() {
       </span>
       <Image src={'/main_logo.svg'} alt="Antares Logo" width={130} height={130} />
       <SearchBar className="h-8 w-full" isAutofocus={false}/>
-      <Sidebar activeState={isSidebarActive} close={() => setIsSidebarActive(false)} />
+      <Sidebar activeState={isSidebarActive} close={() => setIsSidebarActive(false)} categories={loaded}/>
     </header>
   )
 }
 
 function Sidebar({
+  categories,
   activeState,
   close
 }: {
-  activeState: boolean
+  categories: Category[],
+  activeState: boolean,
   close: () => void
 }) {
   return (
@@ -44,13 +49,9 @@ function Sidebar({
       <nav className={clsx(
         'flex flex-col h-full bg-primary text-white font-semibold text-xl',
         '*:border-b-2 *:border-secondary *:pl-4 *:pr-1 *:pb-1 *:pt-5')}>
-        <a className="hover:bg-secondary hover:text-black">Software Development</a>
-        <a className="hover:bg-secondary hover:text-black">AI & Machine Learning</a>
-        <a className="hover:bg-secondary hover:text-black">Data Science</a>
-        <a className="hover:bg-secondary hover:text-black">Life Sciences</a>
-        <a className="hover:bg-secondary hover:text-black">Petcare & Veterinary</a>
-        <a className="hover:bg-secondary hover:text-black">Sales & Marketing</a>
-        <a className="hover:bg-secondary hover:text-black">Design & Arts</a>
+        {
+          categories.map((val) => <a key={val.id} className="hover:bg-secondary hover:text-black">{val.name}</a>)
+        }
       </nav>
     </div>
   )
