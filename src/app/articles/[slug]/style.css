@@ -1,0 +1,27 @@
+#ringkasan {
+  padding: 0 1.5rem;
+}
+
+#ringkasan > li {
+  list-style-type: disc;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  line-height: 1.5rem;
+}
+
+h1 {
+  padding: 1rem 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+h2 {
+  padding: 1rem 0 0.5rem 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+#article > p {
+  font-size: small;
+  line-height: 1.5rem;
+}

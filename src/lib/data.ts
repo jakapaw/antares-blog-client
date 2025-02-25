@@ -1,4 +1,5 @@
 import Article from "@/model/article";
+import Author from "@/model/author";
 import Category from "@/model/category";
 import { notFound } from "next/navigation";
 import qs from "qs";
@@ -114,4 +115,64 @@ export async function getArticlesGroupByCategory(): Promise<
     }
   }
   return articlesByCategory;
+}
+
+export async function getArticle(slug: string): Promise<Article> {
+  const url = new URL(`api/articles/${slug}`, BASE_URL);
+  return fetch(url).then(
+    (response) => {
+      // handle status code except 200
+      switch (response.status) {
+        case 401:
+          throw new UnauthorizedError(
+            getAllArticle.name,
+            "Unauthorized access to /articles"
+          );
+        case 404:
+          throw notFound;
+      }
+      return response.json();
+    }).then((body) => {
+      const article = (body as Article[]).at(0);
+      if (!article) {
+        throw new EmptyResponse(
+          getAllCategory.name,
+          `Empty response from ${url.href}`
+        );
+      }
+      return article;
+    })
+}
+
+export async function getAuthor(slug: string): Promise<Author> {
+  const queryString = qs.stringify({
+    populate: {
+      profile_photo: {},
+      social_media: {},
+      other_link: {}
+    }
+  });
+  const url = new URL(`api/profiles/${slug}?${queryString}`, BASE_URL);
+  return fetch(url).then((response) => {
+    // handle status code except 200
+    switch (response.status) {
+      case 401:
+        throw new UnauthorizedError(
+          getAllArticle.name,
+          "Unauthorized access to /authors"
+        );
+      case 404:
+        throw notFound;
+    }
+    return response.json();
+  }).then((body) => {
+    const author = body as Author;
+    if (!author) {
+      throw new EmptyResponse(
+        getAuthor.name,
+        `Empty response from ${url.href}`
+      )
+    }
+    return author;
+  });
 }

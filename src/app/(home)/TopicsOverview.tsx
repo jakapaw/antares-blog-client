@@ -18,7 +18,7 @@ export default function TopicsOverview({state}: {state: HomePageState}) {
     const result: React.ReactNode[] = [];
     for (const [key, val] of articles) {
       result.push(
-        <TopicGroup topicName={key} articles={val} />
+        <TopicGroup key={key} topicName={key} articles={val} />
       );
     }
     return result;
@@ -45,10 +45,10 @@ function TopicGroup({
         {
           articles.map((el) => {
             return (
-              <Link key={el.id} href={`${BASE_URL}${el.slug}`}
+              <Link key={el.id} href={`${BASE_URL}/articles/${el.slug}/`}
                 className="mr-2 flex flex-col flex-none justify-between basis-32 rounded-md shadow-md h-40 *:bg-transparent"
                 style={{ backgroundImage: 'linear-gradient(#EFEFEF, white)' }}>
-                <Card key={el.id} title={el.title} />
+                <Card title={el.title} />
               </Link>
             )
           })
