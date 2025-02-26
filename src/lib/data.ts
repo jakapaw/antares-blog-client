@@ -1,5 +1,6 @@
 import Article from "@/model/article";
 import Author from "@/model/author";
+import Brand from "@/model/brand";
 import Category from "@/model/category";
 import { notFound } from "next/navigation";
 import qs from "qs";
@@ -174,5 +175,35 @@ export async function getAuthor(slug: string): Promise<Author> {
       )
     }
     return author;
+  });
+}
+
+export async function getBrandInfo() {
+  const queryString = qs.stringify({
+    populate: ["main_logo", "authors.profile_photo"]
+  })
+  const url = new URL(`/api/brand?${queryString}`, BASE_URL);
+
+  return fetch(url).then((response) => {
+    // handle status code except 200
+    switch (response.status) {
+      case 401:
+        throw new UnauthorizedError(
+          getBrandInfo.name,
+          "Unauthorized access to /authors"
+        );
+      case 404:
+        throw notFound;
+    }
+    return response.json();
+  }).then((body) => {
+    const aboutUs = body.data as Brand;
+    if (!aboutUs) {
+      throw new EmptyResponse(
+        getAuthor.name,
+        `Empty response from ${url.href}`
+      )
+    }
+    return aboutUs;
   });
 }

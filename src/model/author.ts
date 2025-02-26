@@ -7,10 +7,10 @@ export default interface Author {
   profile_photo: Media,
   headline: string,
   profile_summary: string,
-  social_media: {
+  social_media: Array<{
     social_media_name: string,
     link: string
-  },
+  }>,
   other_link: {
     name: string,
     link: string

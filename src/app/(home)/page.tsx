@@ -25,7 +25,9 @@ export default function HomePage() {
       <Suspense fallback={<div>Loading...</div>}>
         <TopicsOverview state={state}/>
       </Suspense>
-      <FooterPrimary />
+      <div className="absolute bottom-0 w-full">
+        <FooterPrimary />
+      </div>
     </div>
   );
 }

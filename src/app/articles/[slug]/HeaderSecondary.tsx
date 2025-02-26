@@ -9,7 +9,7 @@ export default function HeaderSecondary() {
   const [searchBarOpen, setSearchBarOpen] = useState(false);
 
   return (
-    <header className="py-2 px-3 flex justify-between border-b-4 border-primary">
+    <header className="py-2 px-3 flex justify-between border-b-2 border-primary">
       <Link href="/">
         <Image src="/main_logo.svg" alt="Antares Logo" width={100} height={100} />
       </Link>

@@ -1,24 +1,57 @@
 'use client';
 import HomeNavigationBar from "@/components/HomeNavigationBar";
 import Spacer from "@/components/Spacer";
+import { getBrandInfo } from "@/lib/data";
+import Author from "@/model/author";
+import Brand from "@/model/brand";
 import Deco1 from "@/resources/deco-1.svg";
-import MainLogo from "@/resources/main_logo.svg";
-import Profile from "@/resources/profile-1.jpg";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+
+class AboutPageState {
+  brand?: Brand;
+  error?: Error;
+}
+
+const BASE_URL = "http://localhost:1337";
 
 export default function AboutUsPage() {
+  const [id, setId] = useState(0);
+  const [state, setState] = useState(new AboutPageState());
+
+  useEffect(() => {
+    const newState = new AboutPageState();
+    getBrandInfo().then((data) => {
+      newState.brand = data;
+      setId(data.id);
+    }).catch((error) => {
+      newState.error = error;
+    }).finally(() => {
+      setState(newState);
+    })
+  }, [id]);
+
+  if (!state.brand) {
+    return (<div>404</div>);
+  }
+
   return (
     <>
       <div className="p-8 flex flex-col items-center">
         <span className="self-start mb-5">
           <HomeNavigationBar />
         </span>
-        <Image src={MainLogo} alt="Antares Logo" className="w-3/4 max-w-[300px]" />
-        <span className="text-xl text-black font-bold">Reach The Skies and Beyond.</span>
+        <Image 
+          src={`${BASE_URL}${state.brand.main_logo.url}`} 
+          width={state.brand.main_logo.width} 
+          height={state.brand.main_logo.height}
+          alt="Antares Logo" 
+          className="w-3/4 max-w-[300px]" />
+        <span className="text-xl text-black font-bold">{state.brand.tagline}</span>
       </div>
       <div className="bg-black text-white px-12 py-5 text-sm font-medium text-justify">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim  veniam, quis nostrud exercitation ullamco.</p>
+        <p>{state.brand.introduction}</p>
         <div className="absolute right-[5%] w-12 h-12 rounded-full bg-secondary"></div>
       </div>
       <div className="flex flex-col items-center px-12">
@@ -28,29 +61,35 @@ export default function AboutUsPage() {
           <h1 className="font-extrabold text-3xl">Best Team</h1>
         </span>
         <div className="mt-4 grid grid-cols-3 gap-6">
-          <TeamMember />
-          <TeamMember />
-          <TeamMember />
-          <TeamMember />
-          <TeamMember />
-          <TeamMember />
-          <TeamMember />
-          <TeamMember />
-          <TeamMember />
+          {
+            state.brand.authors.map((el, i) => 
+              <TeamMember key={i} author={el} />
+            )
+          }
         </div>
       </div>
-      <Spacer />
-      <FooterSecondary />
+      <div className="absolute bottom-0 w-full">
+        <FooterSecondary />
+      </div>
     </>
   )
 }
 
-function TeamMember() {
+function TeamMember({
+  author
+}: {
+  author: Author
+}) {
   return (
     <div className="flex flex-col items-center">
-      <Image src={Profile} alt="" className="rounded-full aspect-square object-cover p-2" />
-      <span className="font-bold text-xs text-black">Francis Cordova</span>
-      <span className="text-xs">Software Engineer</span>
+      <Image 
+        src={`${BASE_URL}${author.profile_photo.url}`} 
+        width={author.profile_photo.width} 
+        height={author.profile_photo.height} 
+        alt={`${author.fullname}'s photo`}
+        className="rounded-full aspect-square object-cover p-2" />
+      <span className="font-bold text-xs text-black">{author.fullname}</span>
+      <span className="text-xs">{author.headline}</span>
     </div>
   )
 }

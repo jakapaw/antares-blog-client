@@ -1,6 +1,8 @@
 'use client';
 import Author from "@/model/author";
+import { LinkedinOutlined } from "@ant-design/icons";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function AuthorInfo({
@@ -24,8 +26,17 @@ export default function AuthorInfo({
               className="aspect-square object-cover max-w-28 pt-1" 
               onClick={() => navigate.push('/author')}/>
             <div className="ml-3">
-              <span className="font-medium">{author.fullname}</span>
-              <p className="text-xs">{author.profile_summary}</p>
+              <span className="font-medium">
+                {author.fullname}
+                <Link 
+                  href={
+                    author.social_media.find((el) => el.social_media_name.toLowerCase() == "linkedin")?.link
+                    || ""
+                  }>
+                  <LinkedinOutlined className="ml-2 text-[#0A66C2] text-lg"/>
+                </Link>
+              </span>
+              <p className="text-xs pt-2">{author.profile_summary}</p>
             </div>
           </div>   
         )
