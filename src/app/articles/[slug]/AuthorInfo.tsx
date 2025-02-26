@@ -10,14 +10,14 @@ export default function AuthorInfo({
 }: {
   authors: Author[]
 }) {
-  const BASE_URL = "http://localhost:1337";
+  const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL?.slice(0,-1) || "http://localhost:1337";
   const navigate = useRouter();
   return (
     <div className="px-4">
-      <h1 className="font-medium text-lg">Tentang Penulis</h1>
+      <h1 className="font-medium text-lg">About Author</h1>
       {
         authors.map((author) => 
-          <div key={author.id} className="flex items-start">
+          <div key={author.id} className="mb-2 flex items-start">
             <Image 
               src={`${BASE_URL}${author.profile_photo.url}`} 
               alt={author.profile_photo.alternativeText || ""} 

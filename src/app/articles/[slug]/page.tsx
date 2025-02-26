@@ -37,7 +37,8 @@ function hydrateState(slug: string) {
 }
 
 export default function ArticlePage() {
-  const BASE_URL = "http://localhost:1337";
+  const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL?.slice(0,-1) || "http://localhost:1337";
+  console.log(BASE_URL);
 
   const router = useRouter();
   const params = useParams<{ slug: string }>();
@@ -89,8 +90,8 @@ export default function ArticlePage() {
         </div>
         <div>
           <hr className="border-2 mt-4" />
-          <h1>Ringkasan</h1>
-          <Markdown id="ringkasan">
+          <h1>Summary</h1>
+          <Markdown id="summary">
             {state.article?.content_summary || ""}
           </Markdown>
           <hr className="border-2 mt-4 mb-2" />

@@ -10,6 +10,13 @@ const nextConfig: NextConfig = {
         pathname: '/uploads/**',
         search: '',
       },
+      {
+        protocol: 'http',
+        hostname: '192.168.1.25',
+        port: '1337',
+        pathname: '/uploads/**',
+        search: '',
+      },
     ],
   },
 };

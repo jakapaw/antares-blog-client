@@ -6,10 +6,7 @@ import Link from "next/link";
 import React, { use } from "react";
 import { HomePageState } from "./page";
 
-const BASE_URL = new URL(
-  "/",
-  process.env.CLIENT_URL || "http://localhost:3000"
-);
+const BASE_URL = process.env.NEXT_PUBLIC_CLIENT_URL || "http://localhost:3000";
 
 export default function TopicsOverview({state}: {state: HomePageState}) {
   const articles = use(state.articles);

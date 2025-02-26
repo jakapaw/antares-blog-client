@@ -1,11 +1,10 @@
-#ringkasan {
-  padding: 0 1.5rem;
+#summary {
+  padding: 0 0.5rem 0 1.5rem;
 }
 
-#ringkasan > li {
+#summary > li {
   list-style-type: disc;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  font-size: small;
   line-height: 1.5rem;
 }
 
@@ -19,6 +18,10 @@ h2 {
   padding: 1rem 0 0.5rem 0;
   font-size: 1.15rem;
   font-weight: 700;
+}
+
+#article {
+  padding: 0 0.5rem 0 1.5rem;
 }
 
 #article > p {

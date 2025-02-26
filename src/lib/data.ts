@@ -5,10 +5,7 @@ import Category from "@/model/category";
 import { notFound } from "next/navigation";
 import qs from "qs";
 
-const BASE_URL = new URL(
-  "/",
-  process.env.SERVER_URL || "http://localhost:1337"
-);
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:1337";
 
 class UnauthorizedError extends Error {
   constructor(fn: string, msg: string, cause?: unknown, stack?: string) {

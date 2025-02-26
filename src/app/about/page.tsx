@@ -14,23 +14,21 @@ class AboutPageState {
   error?: Error;
 }
 
-const BASE_URL = "http://localhost:1337";
+const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL?.slice(0,-1) || "http://localhost:1337";
 
 export default function AboutUsPage() {
-  const [id, setId] = useState(0);
   const [state, setState] = useState(new AboutPageState());
 
   useEffect(() => {
     const newState = new AboutPageState();
     getBrandInfo().then((data) => {
       newState.brand = data;
-      setId(data.id);
     }).catch((error) => {
       newState.error = error;
     }).finally(() => {
       setState(newState);
     })
-  }, [id]);
+  }, []);
 
   if (!state.brand) {
     return (<div>404</div>);
@@ -68,9 +66,8 @@ export default function AboutUsPage() {
           }
         </div>
       </div>
-      <div className="absolute bottom-0 w-full">
-        <FooterSecondary />
-      </div>
+      <Spacer />
+      <FooterSecondary />
     </>
   )
 }
