@@ -145,13 +145,9 @@ export async function getArticle(slug: string): Promise<Article> {
     })
 }
 
-export async function getAuthor(slug: string): Promise<Author> {
+export async function getAuthor(slug: string): Promise<Author[]> {
   const queryString = qs.stringify({
-    populate: {
-      profile_photo: {},
-      social_media: {},
-      other_link: {}
-    }
+    populate: ["profile_photo", "social_media", "other_link"]
   });
   const url = new URL(`api/profiles/${slug}?${queryString}`, SERVER_URL);
   return fetch(url).then((response) => {
@@ -167,7 +163,7 @@ export async function getAuthor(slug: string): Promise<Author> {
     }
     return response.json();
   }).then((body) => {
-    const author = body as Author;
+    const author = body as Author[];
     if (!author) {
       throw new EmptyResponse(
         getAuthor.name,

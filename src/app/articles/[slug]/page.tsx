@@ -88,11 +88,15 @@ export default function ArticlePage() {
         </div>
         <div>
           <hr className="border-2 mt-4" />
-          <h1>Summary</h1>
-          <Markdown id="summary">
-            {state.article?.content_summary || ""}
-          </Markdown>
-          <hr className="border-2 mt-4 mb-2" />
+          {state.article.content_summary != null ? 
+          <>
+            <h1>Summary</h1>
+            <Markdown id="summary">
+              {state.article?.content_summary || ""}
+            </Markdown>
+            <hr className="border-2 mt-4 mb-2" />
+          </>
+          : <></>}
           <Markdown id="article">
             {state.article?.content || ""}
           </Markdown>

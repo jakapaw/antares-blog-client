@@ -24,7 +24,7 @@ export default function AuthorInfo({
               width={author.profile_photo.width}
               height={author.profile_photo.height}
               className="aspect-square object-cover max-w-28 pt-1" 
-              onClick={() => navigate.push('/author')}/>
+              onClick={() => navigate.push(`/authors/${author.username}`)}/>
             <div className="ml-3">
               <span className="font-medium">
                 {author.fullname}

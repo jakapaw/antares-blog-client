@@ -1,16 +1,12 @@
 'use client';
-import { ArrowRightIcon, ArrowUpCircleIcon } from "@heroicons/react/24/solid";
+import { ArrowUpCircleIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
+import SendEmailButton from "./SendEmailButton";
 
 export default function FooterPrimary() {
   return (
     <div className="p-2 mt-6 bg-primary grid grid-cols-[1fr 2fr 1fr] grid-rows-2">
-      <button
-        className="mx-auto col-start-1 col-end-2 flex items-center border-4 border-secondary hover:border-secondaryActive bg-white w-[220px] h-10 mt-1 mb-3 group"
-        onClick={() => window.open("mailto:fingermadness8@gmail.com")}>
-        <span className="flex-grow border-secondary text-sm text-start ml-4">Send Email</span>
-        <ArrowRightIcon className="size-full basis-8 self-end bg-secondary text-primary font-bold group-hover:bg-secondaryActive group-hover:border-secondaryActive" />
-      </button>
+      <SendEmailButton />
       <span className="col-end-1 font-light text-white flex items-end text-sm">2025 Antares</span>
       <Link
         href="/about"

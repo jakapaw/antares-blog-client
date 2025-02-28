@@ -1,11 +1,11 @@
 'use client';
 import HomeNavigationBar from "@/components/HomeNavigationBar";
+import SendEmailButton from "@/components/SendEmailButton";
 import Spacer from "@/components/Spacer";
 import { SERVER_URL } from "@/lib/config";
 import { getBrandInfo } from "@/lib/data";
 import Author from "@/model/author";
 import Brand from "@/model/brand";
-import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -92,12 +92,7 @@ function TeamMember({
 function FooterSecondary() {
   return (
     <div className="p-2 bg-primary flex justify-between">
-      <button
-        className="flex items-center border-4 border-secondary hover:border-secondaryActive bg-white w-[220px] h-10 mt-1 mb-3 group"
-        onClick={() => window.open("mailto:fingermadness8@gmail.com")}>
-        <span className="flex-grow border-secondary text-sm text-start ml-4">Kirim Email</span>
-        <ArrowRightIcon className="size-full basis-8 self-end bg-secondary text-primary font-bold group-hover:bg-secondaryActive group-hover:border-secondaryActive" />
-      </button>
+      <SendEmailButton />
       <span className="col-end-1 font-light text-white flex items-end text-sm">2025 Antares</span>
     </div>
   )
