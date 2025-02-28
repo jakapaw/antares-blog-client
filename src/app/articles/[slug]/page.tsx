@@ -43,12 +43,12 @@ export default function ArticlePage() {
   const { slug } = params;
   const [state, setState] = useState(new ArticlePageState());
 
-  if (!slug) {
-    router.push("/404");
+  if (slug == "") {
+    router.push("/");
   }
 
   useEffect(() => {
-    hydrateState(slug!).then((newState) => {
+    hydrateState(slug).then((newState) => {
       console.log(newState);
       setState(newState);
     });
@@ -73,7 +73,7 @@ export default function ArticlePage() {
             alt={state.article?.cover_image.alternativeText || ""} 
             width={state.article.cover_image.width}
             height={state.article.cover_image.height}
-            className="w-full mb-2 h-60 object-cover" />
+            className="w-full pt-4 mb-2 h-60 object-cover" />
           <span>{state.article?.authors.map((el) => el.fullname).join(" & ")}</span>
           <span className="inline-block w-4"></span>
           <span>{state.article?.updatedAt.split("T").at(0)}</span>

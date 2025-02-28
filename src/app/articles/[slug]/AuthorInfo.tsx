@@ -14,7 +14,7 @@ export default function AuthorInfo({
   const navigate = useRouter();
   return (
     <div className="px-4">
-      <h1 className="font-medium text-lg">About Author</h1>
+      <h1 className="font-bold text-lg">About Author</h1>
       {
         authors.map((author) => 
           <div key={author.id} className="mb-2 flex items-start">
@@ -33,7 +33,7 @@ export default function AuthorInfo({
                     author.social_media.find((el) => el.social_media_name.toLowerCase() == "linkedin")?.link
                     || ""
                   }>
-                  <LinkedinOutlined className="ml-2 text-[#0A66C2] text-lg"/>
+                  <LinkedinOutlined className="ml-2 text-[#0A66C2] text-xl"/>
                 </Link>
               </span>
               <p className="text-xs pt-2">{author.profile_summary}</p>

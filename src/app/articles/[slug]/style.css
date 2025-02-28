@@ -2,29 +2,72 @@
   padding: 0 0.5rem 0 1.5rem;
 }
 
-#summary > li {
+ul {
   list-style-type: disc;
   font-size: small;
   line-height: 1.5rem;
 }
 
+ol {
+  margin: 1rem;
+  list-style-type: decimal;
+  font-size: small;
+  line-height: 1.5rem;
+}
+
 h1 {
-  padding: 1rem 0 0.5rem 0;
+  padding: 1rem 0 0 0;
   font-size: 1.5rem;
   font-weight: 700;
 }
 
 h2 {
-  padding: 1rem 0 0.5rem 0;
+  padding: 1rem 0 0 0;
   font-size: 1.15rem;
   font-weight: 700;
 }
 
 #article {
-  padding: 0 0.5rem 0 1.5rem;
+  padding: 0 1rem 0 0;
+  padding-left: 1rem;
 }
 
 #article > p {
+  padding-top: 1rem;
   font-size: small;
   line-height: 1.5rem;
+}
+
+blockquote {
+  padding: 1rem;
+}
+
+blockquote p::before {
+  content: "\"";
+  font-size: 40px;
+  font-weight: 700;
+  display: inline-block;
+  color: var(--color-cobalt);
+  height: 0;
+}
+
+blockquote:first-child {
+  padding-top: -5;
+}
+
+code {
+  display: block;
+  padding: 1rem;
+  margin: 1rem;
+  font-size: small;
+  background: #000;
+  color: ghostwhite;
+  overflow-x: scroll;
+}
+
+#article img {
+  margin: auto;
+  display: block;
+  width: 50%;
+  max-height: 200px;
 }

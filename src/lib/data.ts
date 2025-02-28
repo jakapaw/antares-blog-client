@@ -61,7 +61,8 @@ export async function getAllArticle(): Promise<Article[]> {
   const queryString = qs.stringify({
     populate: [
       "category",
-      "cover_image"
+      "cover_image",
+      "authors"
     ],
     filters: {
       category: {
@@ -102,13 +103,11 @@ export async function getAllArticle(): Promise<Article[]> {
     });
 }
 
-export async function getArticlesGroupByCategory(): Promise<
+export async function getArticlesGroupByCategory(articles: Promise<Article[]>): Promise<
   Map<string, Article[]>
 > {
-  const articles = await getAllArticle();
   const articlesByCategory: Map<string, Article[]> = new Map();
-
-  for (const article of articles) {
+  for (const article of await articles) {
     if (articlesByCategory.has(article.category.name)) {
       articlesByCategory.get(article.category.name)?.push(article);
     } else {
@@ -174,7 +173,7 @@ export async function getAuthor(slug: string): Promise<Author[]> {
   });
 }
 
-export async function getBrandInfo() {
+export async function getBrandInfo(): Promise<Brand> {
   const queryString = qs.stringify({
     populate: ["main_logo", "authors.profile_photo"]
   })
@@ -201,5 +200,28 @@ export async function getBrandInfo() {
       )
     }
     return aboutUs;
+  });
+}
+
+export async function searchArticle(key: string): Promise<Article[]> {
+  const url = new URL(`/api/search?key=${key}`, SERVER_URL);
+  return fetch(url).then((response) => {
+    // handle status code except 200
+    switch (response.status) {
+      case 401:
+        throw new UnauthorizedError(
+          searchArticle.name,
+          "Unauthorized access to /search"
+        );
+      case 404:
+        throw notFound;
+    }
+    return response.json();
+  }).then((body) => {
+    const articles = body as Article[];
+    if (!articles) {
+      throw new EmptyResponse(searchArticle.name, "No article found");
+    }
+    return articles;
   });
 }
