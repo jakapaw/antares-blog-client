@@ -19,10 +19,10 @@ export default function HomePage() {
 
   return (
     <div>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div></div>}>
         <HeaderPrimary state={state}/>
       </Suspense>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div></div>}>
         <TopicsOverview state={state}/>
       </Suspense>
       <div className="absolute bottom-0 w-full">

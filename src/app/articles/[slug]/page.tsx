@@ -1,6 +1,7 @@
 'use client';
 
 import FooterPrimary from "@/components/FooterPrimary";
+import { SERVER_URL } from "@/lib/config";
 import { getArticle } from "@/lib/data";
 import Article from "@/model/article";
 import Author from "@/model/author";
@@ -37,9 +38,6 @@ function hydrateState(slug: string) {
 }
 
 export default function ArticlePage() {
-  const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL?.slice(0,-1) || "http://localhost:1337";
-  console.log(BASE_URL);
-
   const router = useRouter();
   const params = useParams<{ slug: string }>();
   const { slug } = params;
@@ -51,17 +49,17 @@ export default function ArticlePage() {
 
   useEffect(() => {
     hydrateState(slug!).then((newState) => {
+      console.log(newState);
       setState(newState);
     });
   }, [slug]);
-  console.log(state);
 
   // TODO: show 500 modal if error happen
   if (state.error) {
     return (<div>Server Error</div>);
   } else if (!state.article) {
     // router.push('/404');
-    return (<div>404</div>);
+    return (<div></div>);
   }
 
   return (
@@ -71,7 +69,7 @@ export default function ArticlePage() {
         <h1 className="text-2xl font-bold">{state.article?.title}</h1>
         <div className="text-xs">
           <Image 
-            src={`${BASE_URL}${state.article.cover_image.url}` || ""} 
+            src={`${SERVER_URL}${state.article.cover_image.url}` || ""} 
             alt={state.article?.cover_image.alternativeText || ""} 
             width={state.article.cover_image.width}
             height={state.article.cover_image.height}

@@ -1,12 +1,11 @@
 'use client';
 
+import { CLIENT_URL, SERVER_URL } from "@/lib/config";
 import Article from "@/model/article";
 import clsx from "clsx";
 import Link from "next/link";
 import React, { use } from "react";
 import { HomePageState } from "./page";
-
-const BASE_URL = process.env.NEXT_PUBLIC_CLIENT_URL || "http://localhost:3000";
 
 export default function TopicsOverview({state}: {state: HomePageState}) {
   const articles = use(state.articles);
@@ -42,10 +41,10 @@ function TopicGroup({
         {
           articles.map((el) => {
             return (
-              <Link key={el.id} href={`${BASE_URL}/articles/${el.slug}/`}
+              <Link key={el.id} href={`${CLIENT_URL}/articles/${el.slug}/`}
                 className="mr-2 flex flex-col flex-none justify-between basis-32 rounded-md shadow-md h-40 *:bg-transparent"
                 style={{ backgroundImage: 'linear-gradient(#EFEFEF, white)' }}>
-                <Card title={el.title} />
+                <Card title={el.title} imageUrl={el.cover_image.url} />
               </Link>
             )
           })
@@ -56,9 +55,11 @@ function TopicGroup({
 }
 
 function Card({
-  title
+  title,
+  imageUrl
 }: {
-  title: string
+  title: string,
+  imageUrl: string
 }) {
   return (
     <>
@@ -66,7 +67,7 @@ function Card({
         id="cardImage"
         className="inline-block w-full basis-1/3 rounded-t-md"
         style={{
-          background: 'no-repeat center/cover url("/card-image.png")',
+          background: `no-repeat center/cover url(${SERVER_URL}${imageUrl})`,
         }}>
       </div>
       <span className={clsx('p-2 basis-1/2', title.length <= 50 ? 'text-[12px]' : 'text-[10px]')}>{title}</span>

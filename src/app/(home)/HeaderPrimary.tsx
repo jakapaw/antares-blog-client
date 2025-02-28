@@ -19,7 +19,7 @@ export default function HeaderPrimary({state}: {state: HomePageState}) {
           <Bars3Icon className="size-8 text-cobalt" />
         </button>
       </span>
-      <Image src={'/main_logo.svg'} alt="Antares Logo" width={130} height={130} />
+      <Image src="main_logo.svg" alt="Antares Logo" width={130} height={130}/>
       <SearchBar className="h-8 w-full" isAutofocus={false}/>
       <Sidebar activeState={isSidebarActive} close={() => setIsSidebarActive(false)} categories={loaded}/>
     </header>

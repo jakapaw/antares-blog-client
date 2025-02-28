@@ -1,10 +1,10 @@
 'use client';
 import HomeNavigationBar from "@/components/HomeNavigationBar";
 import Spacer from "@/components/Spacer";
+import { SERVER_URL } from "@/lib/config";
 import { getBrandInfo } from "@/lib/data";
 import Author from "@/model/author";
 import Brand from "@/model/brand";
-import Deco1 from "@/resources/deco-1.svg";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -13,8 +13,6 @@ class AboutPageState {
   brand?: Brand;
   error?: Error;
 }
-
-const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL?.slice(0,-1) || "http://localhost:1337";
 
 export default function AboutUsPage() {
   const [state, setState] = useState(new AboutPageState());
@@ -31,7 +29,7 @@ export default function AboutUsPage() {
   }, []);
 
   if (!state.brand) {
-    return (<div>404</div>);
+    return (<div></div>);
   }
 
   return (
@@ -41,7 +39,7 @@ export default function AboutUsPage() {
           <HomeNavigationBar />
         </span>
         <Image 
-          src={`${BASE_URL}${state.brand.main_logo.url}`} 
+          src={`${SERVER_URL}${state.brand.main_logo.url}`} 
           width={state.brand.main_logo.width} 
           height={state.brand.main_logo.height}
           alt="Antares Logo" 
@@ -55,7 +53,7 @@ export default function AboutUsPage() {
       <div className="flex flex-col items-center px-12">
         <Spacer />
         <span>
-          <Image src={Deco1} alt="" className="relative -left-8" />
+          <Image src="deco-1.svg" width={60} height={60} alt="" className="relative -left-8" />
           <h1 className="font-extrabold text-3xl">Best Team</h1>
         </span>
         <div className="mt-4 grid grid-cols-3 gap-6">
@@ -80,7 +78,7 @@ function TeamMember({
   return (
     <div className="flex flex-col items-center">
       <Image 
-        src={`${BASE_URL}${author.profile_photo.url}`} 
+        src={`${SERVER_URL}${author.profile_photo.url}`} 
         width={author.profile_photo.width} 
         height={author.profile_photo.height} 
         alt={`${author.fullname}'s photo`}

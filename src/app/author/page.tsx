@@ -1,7 +1,6 @@
 import HomeNavigationBar from "@/components/HomeNavigationBar";
 import Image from "next/image";
 import Link from "next/link";
-import TempProfile from "../../../public/profile-1.jpg";
 
 export default function AuthorPage() {
   return (
@@ -14,7 +13,7 @@ export default function AuthorPage() {
         backgroundPosition: '50% 110%'
       }}>
         <HomeNavigationBar textStyle="text-white" />
-        <Image src={TempProfile} alt="Profile Image" className="mt-2 self-center aspect-square object-cover rounded-full w-1/2"/>
+        <Image src="profile-1.png" alt="Profile Image" className="mt-2 self-center aspect-square object-cover rounded-full w-1/2"/>
         <span className="text-2xl text-white font-bold self-center">Frances Cordova</span>
       </div>
       <div className="flex flex-col items-center p-8 gap-8">
@@ -38,11 +37,9 @@ export default function AuthorPage() {
 
 function ContactLink({
   name,
-  logo,
   href = ""
 }: {
   name: string,
-  logo?: string,
   href: string
 }) {
   return (

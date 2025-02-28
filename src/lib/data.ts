@@ -4,8 +4,7 @@ import Brand from "@/model/brand";
 import Category from "@/model/category";
 import { notFound } from "next/navigation";
 import qs from "qs";
-
-const BASE_URL = process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:1337";
+import { SERVER_URL } from "./config";
 
 class UnauthorizedError extends Error {
   constructor(fn: string, msg: string, cause?: unknown, stack?: string) {
@@ -26,7 +25,7 @@ class EmptyResponse extends Error {
 }
 
 export async function getAllCategory(): Promise<Category[]> {
-  const url = new URL("api/categories/", BASE_URL);
+  const url = new URL("api/categories/", SERVER_URL);
   return fetch(url)
     .then((response) => {
       switch (response.status) {
@@ -60,17 +59,21 @@ export async function getAllArticle(): Promise<Article[]> {
     });
 
   const queryString = qs.stringify({
+    populate: [
+      "category",
+      "cover_image"
+    ],
     filters: {
       category: {
         id: {
           $in: categoryIds,
         },
       },
-    },
+    }
   });
   const url = new URL(
-    `api/articles?populate=category&${queryString}`,
-    BASE_URL
+    `api/articles?${queryString}`,
+    SERVER_URL
   );
 
   return fetch(url)
@@ -116,7 +119,7 @@ export async function getArticlesGroupByCategory(): Promise<
 }
 
 export async function getArticle(slug: string): Promise<Article> {
-  const url = new URL(`api/articles/${slug}`, BASE_URL);
+  const url = new URL(`api/articles/${slug}`, SERVER_URL);
   return fetch(url).then(
     (response) => {
       // handle status code except 200
@@ -150,7 +153,7 @@ export async function getAuthor(slug: string): Promise<Author> {
       other_link: {}
     }
   });
-  const url = new URL(`api/profiles/${slug}?${queryString}`, BASE_URL);
+  const url = new URL(`api/profiles/${slug}?${queryString}`, SERVER_URL);
   return fetch(url).then((response) => {
     // handle status code except 200
     switch (response.status) {
@@ -179,7 +182,7 @@ export async function getBrandInfo() {
   const queryString = qs.stringify({
     populate: ["main_logo", "authors.profile_photo"]
   })
-  const url = new URL(`/api/brand?${queryString}`, BASE_URL);
+  const url = new URL(`/api/brand?${queryString}`, SERVER_URL);
 
   return fetch(url).then((response) => {
     // handle status code except 200
