@@ -62,26 +62,27 @@ export default function ArticlePage() {
   return (
     <>
       <HeaderSecondary />
-      <main className="flex flex-col gap-1 p-4">
-        <h1 className="text-2xl font-bold">{state.article?.title}</h1>
-        <div className="text-xs">
+      <main className="flex flex-col gap-1 p-4 md:mx-auto md:w-[75%] xl:w-[60%] font-[Nunito]">
+        <h1 className="text-2xl font-bold md:text-[2rem] md:mt-5">{state.article?.title}</h1>
+        <div className="md:my-5">
           <Image 
             src={`${SERVER_URL}${state.article.cover_image.url}` || ""} 
             alt={state.article?.cover_image.alternativeText || ""} 
             width={state.article.cover_image.width}
             height={state.article.cover_image.height}
-            className="w-full pt-4 mb-2 h-60 object-cover" />
-          <span>{state.article?.authors.map((el) => el.fullname).join(" & ")}</span>
-          <span className="inline-block w-4"></span>
-          <span>{state.article?.updatedAt.split("T").at(0)}</span>
-        </div>
-        <div className="pt-2">
-          <span className="text-sm">Tags: </span>
+            className="w-full pt-4 mb-2 h-60 object-cover md:h-[500px]" />
+          <div className="flex justify-between">
+            <span className="text-xs md:text-base">{state.article?.authors.map((el) => el.fullname).join(" & ")}</span>
+            <span className="inline-block w-4"></span>
+            <span className="text-xs md:text-base">{state.article?.updatedAt.split("T").at(0)}</span>
+          </div>
+          <div className="pt-2">
             { state.article?.tags.map((el, i) =>
-              <span key={i} className="bg-secondary mr-1 text-xs p-1 rounded border-b-2 border-yellow-500 active:border-0">
+              <span key={i} className="bg-secondary mr-1 md:mr-2 text-xs md:text-base px-3 rounded border-b-2 border-yellow-500 active:border-0">
                 { "#" + el.tag }
               </span>
             )}
+        </div>
         </div>
         <div>
           <hr className="border-2 mt-4" />
@@ -98,8 +99,14 @@ export default function ArticlePage() {
             {state.article?.content || ""}
           </Markdown>
         </div>
+        <hr className="border-2 mt-4 mb-2" />
+        <div className="">
+          <h1 className="font-bold text-lg md:text-[1.2rem] mb-4">About Author</h1>
+          <div className="md:flex">
+            <AuthorInfo authors={state.authors || []} />
+          </div>
+        </div>
       </main>
-      <AuthorInfo authors={state.authors || []} />
       <FooterPrimary />
     </>
   );

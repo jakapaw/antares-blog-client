@@ -13,11 +13,10 @@ export default function AuthorInfo({
 }) {
   const navigate = useRouter();
   return (
-    <div className="px-4">
-      <h1 className="font-bold text-lg">About Author</h1>
+    <>
       {
         authors.map((author) => 
-          <div key={author.id} className="mb-2 flex items-start">
+          <div key={author.id} className="flex mb-4 md:mr-10 items-start max-w-[500px]">
             <Image 
               src={`${SERVER_URL}${author.profile_photo.url}`} 
               alt={author.profile_photo.alternativeText || ""} 
@@ -41,6 +40,6 @@ export default function AuthorInfo({
           </div>   
         )
       }
-    </div>
+    </>
   )
 }

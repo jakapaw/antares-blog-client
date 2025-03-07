@@ -24,8 +24,8 @@ html {
 @layer base {
   :root {
     --color-primary: #020a63;
-    --color-secondary: #ffe16a;
-    --color-secondaryActive: #ffcc00;
+    --color-secondary: #ffcc00;
+    --color-secondaryActive: #ffe16a;
     --color-cobalt: #0047ab;
     --color-black: #303030;
     --color-white: #ffffff;

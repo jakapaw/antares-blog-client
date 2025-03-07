@@ -38,7 +38,7 @@ export default function SearchResult({ search }: { search: string }) {
     hydrateState(state.search!).then(newState => {
       setState(newState);
     });
-  }, []);
+  }, [search]);
 
   if (state.error) {
     return (<div>Server Error</div>);

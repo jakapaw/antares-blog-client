@@ -42,7 +42,7 @@ function TopicGroup({
               <Link key={el.id} href={`${CLIENT_URL}/articles/${el.slug}/`}
                 className="mr-3 flex flex-col flex-none justify-between basis-32 rounded-md shadow-md h-40 *:bg-transparent"
                 style={{ backgroundImage: 'linear-gradient(#EFEFEF, white)' }}>
-                <Card title={el.title} imageUrl={el.cover_image.url} authors={el.authors} date={el.updatedAt}/>
+                <ArticleCard title={el.title} imageUrl={el.cover_image.url} authors={el.authors} date={el.updatedAt}/>
               </Link>
             )
           })
@@ -52,7 +52,7 @@ function TopicGroup({
   );
 }
 
-function Card({
+function ArticleCard({
   title,
   authors,
   date,

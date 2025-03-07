@@ -2,17 +2,18 @@
   padding: 0 0.5rem 0 1.5rem;
 }
 
-ul {
+li {
   list-style-type: disc;
-  font-size: small;
-  line-height: 1.5rem;
 }
 
 ol {
   margin: 1rem;
   list-style-type: decimal;
+}
+
+li, ol {
   font-size: small;
-  line-height: 1.5rem;
+  line-height: 2rem;
 }
 
 h1 {
@@ -24,7 +25,7 @@ h1 {
 h2 {
   padding: 1rem 0 0 0;
   font-size: 1.15rem;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 #article {
@@ -32,10 +33,10 @@ h2 {
   padding-left: 1rem;
 }
 
-#article > p {
-  padding-top: 1rem;
+p {
+  padding: 0.75rem 0 0.75rem 0;
   font-size: small;
-  line-height: 1.5rem;
+  line-height: 2rem;
 }
 
 blockquote {
@@ -70,4 +71,19 @@ code {
   display: block;
   width: 50%;
   max-height: 200px;
+}
+
+@media screen and (min-width: 640px) {
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  p, li {
+    font-size: 1.1rem;
+  }
+  code {
+    font-size: 1rem;
+  }
 }

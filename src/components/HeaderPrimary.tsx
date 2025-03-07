@@ -6,7 +6,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function HeaderPrimary({
   categories,
@@ -15,8 +15,13 @@ export default function HeaderPrimary({
   categories: Category[],
   onSearch: (search: string) => void
 }) {
-  const isMobile = window.innerWidth;
-  if (isMobile <= 500) {
+  const isMobile = useRef(false);
+
+  useEffect(() => {
+    isMobile.current = window.innerWidth < 640;
+  }, []);
+
+  if (isMobile.current) {
     return <HeaderMobile categories={categories} onSearch={onSearch}/>
   } else {
     return <HeaderDesktop onSearch={onSearch} />
@@ -76,19 +81,29 @@ function Sidebar({
   )
 }
 
-function HeaderDesktop() {
+function HeaderDesktop({
+  onSearch
+}: {
+  onSearch: (search: string) => void
+}) {
   return (
-    <header className="px-5 flex justify-between items-center">
-      <Image src={'/main_logo.svg'} alt="Antares Logo" width={180} height={180}/>
-      <div className="w-2/3 h-full flex flex-col justify-center bg-gray-50">
-        <div className="w-1/4 self-center"><SearchBar isAutofocus={false} /></div>
-      </div>
-      <div>
-        <Link
-          href="/about"
-          className="mx-auto h-fit col-start-1 col-end-2 bg-cobalt p-2 px-4 font-semibold text-white hover:bg-[#005AD9] max-w-[150px]">
-          About Us
-        </Link>
+    <header className="px-5 flex border-cobalt border-b-2 py-1">
+      <Image 
+        src={'/main_logo.svg'} 
+        alt="Antares Logo" 
+        width={180} 
+        height={180} 
+        onClick={() => window.location.assign("/")}
+        className="w-[120px] md:w-[180px]"/>
+      <div className="flex items-center justify-end w-full">
+        <div className="w-1/4 min-w-[200px] mr-10"><SearchBar isAutofocus={false} onSearch={onSearch}/></div>
+        <div>
+          <Link
+            href="/about"
+            className="mx-auto h-fit col-start-1 col-end-2 bg-cobalt p-2 px-4 font-semibold text-white hover:bg-[#005AD9] max-w-[150px]">
+            About Us
+          </Link>
+        </div>
       </div>
     </header>
   )
