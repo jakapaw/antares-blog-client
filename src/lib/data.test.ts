@@ -3,8 +3,8 @@ import {
   getAllArticle,
   getAllCategory,
   getArticle,
-  getArticlesGroupByCategory,
   getAuthor,
+  groupArticlesByCategory,
   searchArticle,
 } from "./data";
 
@@ -22,7 +22,8 @@ describe("test all data units", () => {
   });
 
   test("should group articles by each category", async () => {
-    const articles = await getArticlesGroupByCategory(getAllArticle());
+    const articles = await groupArticlesByCategory(getAllArticle());
+    if (!articles) throw new Error();
     expect(articles.size).not.toBe(0);
     articles.keys().forEach((key) => {
       expect(articles.get(key)?.length).not.toBe(0);

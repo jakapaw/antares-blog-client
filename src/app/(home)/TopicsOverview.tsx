@@ -2,14 +2,12 @@
 
 import { CLIENT_URL, SERVER_URL } from "@/lib/config";
 import Article from "@/model/article";
+import Author from "@/model/author";
 import clsx from "clsx";
 import Link from "next/link";
-import React, { use } from "react";
-import { HomePageState } from "./page";
+import React from "react";
 
-export default function TopicsOverview({state}: {state: HomePageState}) {
-  const articles = use(state.articles);
-
+export default function TopicsOverview({articles}: {articles: Map<string, Article[]>}) {
   function renderTopics() {
     const result: React.ReactNode[] = [];
     for (const [key, val] of articles) {
@@ -35,7 +33,7 @@ function TopicGroup({
   articles: Article[]
 }) {
   return (
-    <div className="mt-4 pb-2 border-b-2 border-cobalt">
+    <div className="mt-4 pb-2">
       <h1 className="p-1 font-bold text-xl">{topicName}</h1>
       <div className="p-2 flex flex-none overflow-x-scroll no-scrollbar">
         {
@@ -44,7 +42,7 @@ function TopicGroup({
               <Link key={el.id} href={`${CLIENT_URL}/articles/${el.slug}/`}
                 className="mr-3 flex flex-col flex-none justify-between basis-32 rounded-md shadow-md h-40 *:bg-transparent"
                 style={{ backgroundImage: 'linear-gradient(#EFEFEF, white)' }}>
-                <Card title={el.title} imageUrl={el.cover_image.url} />
+                <Card title={el.title} imageUrl={el.cover_image.url} authors={el.authors} date={el.updatedAt}/>
               </Link>
             )
           })
@@ -56,10 +54,14 @@ function TopicGroup({
 
 function Card({
   title,
+  authors,
+  date,
   imageUrl
 }: {
   title: string,
-  imageUrl: string
+  imageUrl: string,
+  authors: Author[],
+  date: string
 }) {
   return (
     <>
@@ -72,8 +74,8 @@ function Card({
       </div>
       <span className={clsx('p-2 basis-1/2', title.length <= 50 ? 'text-[12px]' : 'text-[10px]')}>{title}</span>
       <div className="p-2 flex justify-between text-[8px]">
-        <span>Author Name</span>
-        <span>Date</span>
+        <span>{authors[0].fullname.split(" ")[0]}</span>
+        <span>{date.split("T")[0]}</span>
       </div>
     </>
   )

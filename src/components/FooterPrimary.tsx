@@ -17,7 +17,7 @@ export default function FooterPrimary() {
         className="flex flex-col justify-end items-end text-white font-light text-sm col-start-3 row-start-1 row-end-3 size-full"
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
         <ArrowUpCircleIcon className="size-12 text-blue-500" />
-        <span className="text-sm">Scroll to Top</span>
+        <span className="text-xs">Scroll to Top</span>
       </button>
     </div>
   )

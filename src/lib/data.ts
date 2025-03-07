@@ -103,10 +103,13 @@ export async function getAllArticle(): Promise<Article[]> {
     });
 }
 
-export async function getArticlesGroupByCategory(articles: Promise<Article[]>): Promise<
-  Map<string, Article[]>
+export async function groupArticlesByCategory(articles?: Promise<Article[]>): Promise<
+  Map<string, Article[]> | undefined
 > {
   const articlesByCategory: Map<string, Article[]> = new Map();
+  
+  if (!articles) return;
+
   for (const article of await articles) {
     if (articlesByCategory.has(article.category.name)) {
       articlesByCategory.get(article.category.name)?.push(article);

@@ -9,8 +9,8 @@ import Markdown from "markdown-to-jsx";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import HeaderSecondary from "../../../components/HeaderSecondary";
 import AuthorInfo from "./AuthorInfo";
-import HeaderSecondary from "./HeaderSecondary";
 import "./style.css";
 
 class ArticlePageState {
@@ -24,7 +24,7 @@ class ArticlePageState {
 }
 
 function hydrateState(slug: string) {
-  const state = new ArticlePageState();
+  const state: ArticlePageState = {};
   return getArticle(slug)
     .then((article) => {
       state.article = article;
@@ -48,10 +48,7 @@ export default function ArticlePage() {
   }
 
   useEffect(() => {
-    hydrateState(slug).then((newState) => {
-      console.log(newState);
-      setState(newState);
-    });
+    hydrateState(slug).then((newState) => setState(newState));
   }, [slug]);
 
   // TODO: show 500 modal if error happen

@@ -1,31 +1,57 @@
-import { getAllCategory, getArticlesGroupByCategory } from "@/lib/data";
+"use client";
+import { getAllArticle, getAllCategory, groupArticlesByCategory } from "@/lib/data";
 import Article from "@/model/article";
 import Category from "@/model/category";
-import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
 import FooterPrimary from "../../components/FooterPrimary";
-import HeaderPrimary from "./HeaderPrimary";
+import HeaderPrimary from "../../components/HeaderPrimary";
 import TopicsOverview from "./TopicsOverview";
+import SearchResult from "./search/SearchResult";
 
-export type HomePageState = {
-  articles: Promise<Map<string, Article[]>>,
-  categories: Promise<Category[]>
+class HomePageState {
+  articles?: Map<string, Article[]>;
+  categories?: Category[];
 }
 
 export default function HomePage() {
-  const state: HomePageState = {
-    articles: getArticlesGroupByCategory(),
-    categories: getAllCategory()
+  return (
+    <Suspense>
+      <Home />
+    </Suspense>
+  )
+}
+
+function Home() {
+  const searchParams = useSearchParams();
+  const [state, setState] = useState(new HomePageState());
+  const [search, setSearch] = useState(searchParams.get("search") || "");
+
+  function handleSearch(search: string) {
+    setSearch(search);
   }
 
+  useEffect(() => {
+    const newState = { ...state };
+    const prom1 = groupArticlesByCategory(getAllArticle()).then((val) => {
+      newState.articles = val;
+    });
+    const prom2 = getAllCategory().then((val) => {
+      newState.categories = val;
+    })
+    Promise.all([prom1, prom2]).then(() => {
+      setState(newState);
+    });
+  }, []);
+
   return (
-    <div>
-      <Suspense fallback={<div></div>}>
-        <HeaderPrimary state={state}/>
-      </Suspense>
-      <Suspense fallback={<div></div>}>
-        <TopicsOverview state={state}/>
-      </Suspense>
-      <div className="absolute bottom-0 w-full">
+    <div className="flex flex-col h-svh">
+      <HeaderPrimary categories={state.categories || []} onSearch={handleSearch}/>
+      { !search || search === ""
+        ? <TopicsOverview articles={state.articles || new Map()}/>
+        : <SearchResult search={search}/>
+      }
+      <div className="w-full mt-auto">
         <FooterPrimary />
       </div>
     </div>
