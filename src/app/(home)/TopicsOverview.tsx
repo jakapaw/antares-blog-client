@@ -1,13 +1,43 @@
 'use client';
 
 import { CLIENT_URL, SERVER_URL } from "@/lib/config";
+import { getAllArticle, groupArticlesByCategory } from "@/lib/data";
 import Article from "@/model/article";
 import Author from "@/model/author";
 import clsx from "clsx";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import ArticleList from "../../components/ArticleList";
 
-export default function TopicsOverview({articles}: {articles: Map<string, Article[]>}) {
+class State {
+  articles?: Map<string, Article[]>
+}
+
+function useHydrateState() {
+  const [state, setState] = useState(new State());
+  useEffect(() => {
+    groupArticlesByCategory(getAllArticle()).then(val => {
+      setState({ articles: val });
+    })
+  }, []);
+  return state;
+}
+
+export default function TopicsOverview() {
+  const state = useHydrateState();
+  const [isMobile, setIsMobile] = useState(false);
+  
+    useEffect(() => {
+      setIsMobile(window.innerWidth < 640); 
+    }, []);
+
+  if(isMobile)
+    return <ArticleCardView articles={state.articles || new Map()}/>
+  else 
+    return <ArticleList articles={state.articles || new Map()}/>
+}
+
+function ArticleCardView({articles}: {articles: Map<string, Article[]>}) {
   function renderTopics() {
     const result: React.ReactNode[] = [];
     for (const [key, val] of articles) {

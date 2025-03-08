@@ -1,28 +1,42 @@
 'use client'
 
 import { SearchBar } from "@/components/SearchBar";
+import { getAllCategory } from "@/lib/data";
 import Category from "@/model/category";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function HeaderPrimary({
-  categories,
-  onSearch
-}: {
-  categories: Category[],
-  onSearch: (search: string) => void
-}) {
-  const isMobile = useRef(false);
+class State {
+  categories?: Category[]
+}
+
+function useHydrateState(): State {
+  const [state, setState] = useState(new State());
+  useEffect(() => {
+    getAllCategory().then((val) => {
+      setState({ categories: val });
+    })
+  }, []);
+  return state;
+}
+
+export default function HeaderPrimary() {
+  const state: State = useHydrateState();
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    isMobile.current = window.innerWidth < 640;
-  }, []);
+    setIsMobile(window.innerWidth < 640); 
+  }, [])
 
-  if (isMobile.current) {
-    return <HeaderMobile categories={categories} onSearch={onSearch}/>
+  function onSearch(search: string) {
+    window.location.assign("?search=" + search);
+  }
+
+  if (isMobile) {
+    return <HeaderMobile categories={state.categories || []} onSearch={onSearch}/>
   } else {
     return <HeaderDesktop onSearch={onSearch} />
   }
@@ -96,11 +110,11 @@ function HeaderDesktop({
         onClick={() => window.location.assign("/")}
         className="w-[120px] md:w-[180px]"/>
       <div className="flex items-center justify-end w-full">
-        <div className="w-1/4 min-w-[200px] mr-10"><SearchBar isAutofocus={false} onSearch={onSearch}/></div>
-        <div>
+        <div className="w-1/4 min-w-[200px] mr-5"><SearchBar isAutofocus={false} onSearch={onSearch}/></div>
+        <div className="w-fit">
           <Link
             href="/about"
-            className="mx-auto h-fit col-start-1 col-end-2 bg-cobalt p-2 px-4 font-semibold text-white hover:bg-[#005AD9] max-w-[150px]">
+            className="bg-cobalt py-2 px-1 text-xs md:px-4 md:text-base font-semibold text-white hover:bg-[#005AD9] inline-block">
             About Us
           </Link>
         </div>

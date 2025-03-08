@@ -5,7 +5,7 @@ import { groupArticlesByCategory, searchArticle } from '@/lib/data';
 import Article from "@/model/article";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import ArticleList from './ArticleList';
+import ArticleList from '../../../components/ArticleList';
 
 class SearchPageState {
   search?: string;
@@ -28,14 +28,13 @@ function hydrateState(key: string) {
 
 export default function SearchResult({ search }: { search: string }) {
   const router = useRouter();
-  const [state, setState] = useState(new SearchPageState);
-  state.search = search;
+  const [state, setState] = useState(new SearchPageState());
 
   useEffect(() => {
-    if (state.search == "" || !state.search) {
+    if (search == "" || !search) {
       router.replace(`${CLIENT_URL}/`);
     }
-    hydrateState(state.search!).then(newState => {
+    hydrateState(search!).then(newState => {
       setState(newState);
     });
   }, [search]);

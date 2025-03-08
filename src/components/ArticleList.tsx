@@ -2,14 +2,14 @@ import { CLIENT_URL, SERVER_URL } from '@/lib/config';
 import Author from '@/model/author';
 import Image from 'next/image';
 import Link from 'next/link';
-import Article from '../../../model/article';
+import Article from '../model/article';
 export default function ArticleList({ 
   articles 
 }: {
   articles: Map<string, Article[]>
 }) {
   return (
-    <div className="">
+    <div className="w-full lg:w-3/4 mx-auto">
       {
         // articles.map((el, i) => <ArticleEntry key={i} article={el}/>)
         Array.from(articles.entries()).map(([key, val], i) => <CategoryGroup key={i} articles={val} category={key} />)
