@@ -1,17 +1,18 @@
 'use client';
 import { ArrowUpCircleIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
+import FooterSecondary from "./FooterSecondary";
 import SendEmailButton from "./SendEmailButton";
 
 export default function FooterPrimary() {
-  const isMobile = useRef(false);
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
-    isMobile.current = window.innerWidth < 640;
+    setIsMobile(window.innerWidth < 640);
   }, []);
 
-  if (isMobile.current) return (
+  if (isMobile) return (
     <div className="p-2 mt-6 bg-primary grid grid-cols-[1fr 2fr 1fr] grid-rows-2">
       <SendEmailButton />
       <span className="col-end-1 font-light text-white flex items-end text-sm">2025 Antares</span>
@@ -29,9 +30,6 @@ export default function FooterPrimary() {
     </div>
   );
   else return (
-    <div className="p-2 mt-6 bg-primary text-center">
-      <SendEmailButton />
-      <span className="text-white text-base">@2025 Antares</span>
-    </div>
+    <FooterSecondary />
   )
 }

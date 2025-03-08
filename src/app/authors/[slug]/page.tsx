@@ -17,7 +17,7 @@ export default async function AuthorPage({
   }
 
   return (
-    <>
+    <div className="md:w-[600px] h-screen md:mx-auto shadow-xl">
       <div className="flex flex-col p-8 pb-14 gap-4" 
       style={{
         backgroundImage: 'url(/profile-bg.png)',
@@ -32,7 +32,7 @@ export default async function AuthorPage({
       <div className="flex flex-col items-center p-8 gap-8">
         <div>
           <h1 className="text-xl font-semibold mb-2">About Me</h1>
-          <p className="text-justify">{author.profile_summary}</p>
+          <p className="text-justify text-base">{author.profile_summary}</p>
         </div>
         <div className="text-center">
           <h1 className="text-xl font-semibold mb-4">Contact & Social Media</h1>
@@ -41,7 +41,7 @@ export default async function AuthorPage({
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

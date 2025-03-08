@@ -1,6 +1,6 @@
 'use client';
+import FooterSecondary from "@/components/FooterSecondary";
 import HomeNavigationBar from "@/components/HomeNavigationBar";
-import SendEmailButton from "@/components/SendEmailButton";
 import Spacer from "@/components/Spacer";
 import { SERVER_URL } from "@/lib/config";
 import { getBrandInfo } from "@/lib/data";
@@ -34,8 +34,8 @@ export default function AboutUsPage() {
 
   return (
     <>
-      <div className="p-8 flex flex-col items-center md:mx-auto md:w-[75%] xl:w-[60%]">
-        <span className="self-start mb-5">
+      <div className="flex flex-col items-center md:mx-auto md:w-[75%] xl:w-[60%]">
+        <span className="p-8 self-start mb-5">
           <HomeNavigationBar />
         </span>
         <Image
@@ -84,15 +84,6 @@ function TeamMember({
         className="rounded-full aspect-square object-cover p-2 w-[100px] md:w-[150px]" />
       <span className="font-bold text-xs text-black">{author.fullname}</span>
       <span className="text-xs">{author.headline}</span>
-    </div>
-  )
-}
-
-function FooterSecondary() {
-  return (
-    <div className="p-2 bg-primary flex justify-between">
-      <SendEmailButton />
-      <span className="col-end-1 font-light text-white flex items-end text-sm">2025 Antares</span>
     </div>
   )
 }

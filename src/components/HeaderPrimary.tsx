@@ -25,7 +25,7 @@ function useHydrateState(): State {
 
 export default function HeaderPrimary() {
   const state: State = useHydrateState();
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
     setIsMobile(window.innerWidth < 640); 
