@@ -3,6 +3,7 @@ import {
   getAllArticle,
   getAllCategory,
   getArticle,
+  getArticlesByCategory,
   getAuthor,
   groupArticlesByCategory,
   searchArticle,
@@ -42,7 +43,11 @@ describe("test all data units", () => {
 
   test("when search by keyword, then return array articles", async () => {
     const articles = await searchArticle("N");
-    console.log(articles);
     expect(articles.length).toBeGreaterThan(0);
+  });
+
+  test("should get articles by a category", async () => {
+    const result = await getArticlesByCategory("Computer Science");
+    expect(result).not.toBeNull();
   });
 });

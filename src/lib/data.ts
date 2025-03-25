@@ -228,3 +228,46 @@ export async function searchArticle(key: string): Promise<Article[]> {
     return articles;
   });
 }
+
+export async function getArticlesByCategory(categoryName: string) {
+  const queryString = qs.stringify({
+    filters: {
+      name: {
+        $eq: categoryName.replaceAll("%20", " ")
+      }
+    },
+    populate: {
+      articles: {
+        populate: ["cover_image", "authors"],
+        fields: {
+          0: "id",
+          1: "title",
+          2: "updatedAt"
+        }
+      }
+    }
+  });
+  const url = new URL(`/api/categories?${queryString}`, SERVER_URL);
+  return fetch(url).then((response) => {
+    // handle status code except 200
+    switch (response.status) {
+      case 401:
+        throw new UnauthorizedError(
+          getBrandInfo.name,
+          "Unauthorized access to /authors"
+        );
+      case 404:
+        throw notFound;
+    }
+    return response.json();
+  }).then((body) => {
+    const articles: Article[] = body.data[0].articles as Article[];
+    const category: Category = {
+      id: body.data[0].id,
+      name: body.data[0].name,
+      description: body.data[0].description,
+      articles
+    };
+    return category;
+  });
+}

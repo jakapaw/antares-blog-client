@@ -57,7 +57,7 @@ function HeaderMobile({
           <Bars3Icon className="size-8 text-cobalt" />
         </button>
       </span>
-      <Image src="main_logo.svg" alt="Antares Logo" width={130} height={130} onClick={() => window.location.assign("/")}/>
+      <Image src="/main_logo.svg" alt="Antares Logo" width={130} height={130} onClick={() => window.location.assign("/")}/>
       <SearchBar isAutofocus={false} onSearch={onSearch}/>
       <Sidebar activeState={isSidebarActive} close={() => setIsSidebarActive(false)} categories={categories}/>
     </header>
@@ -88,7 +88,7 @@ function Sidebar({
         'flex flex-col h-full bg-primary text-white font-semibold text-xl',
         '*:border-b-2 *:border-secondary *:pl-4 *:pr-1 *:pb-1 *:pt-5')}>
         {
-          categories.map((val) => <a key={val.id} className="hover:bg-secondary hover:text-black">{val.name}</a>)
+          categories.map((val) => <a key={val.id} href={`search/categories/${val.name}`} className="hover:bg-secondary hover:text-black">{val.name}</a>)
         }
       </nav>
     </div>

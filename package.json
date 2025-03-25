@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "dev:mobile": "NODE_ENV=mobile next dev --turbopack",
+    "dev:local": "NODE_ENV=local next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
