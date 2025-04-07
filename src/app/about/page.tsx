@@ -39,16 +39,16 @@ export default function AboutUsPage() {
           <HomeNavigationBar />
         </span>
         <div className="bg-blue-950 px-14 py-6 text-white">
-          <h1 className="text-[80px] md:text-[110px] font-bold">Antares</h1>
-          <h2 className="text-2xl">Reach The Skies and Beyond</h2>
-          <p className="text-lg my-10">{state.brand.introduction}</p>
+          <h1 className="text-[50px] md:text-[110px] font-bold">Antares</h1>
+          <h2 className="text-lg md:text-2xl">Reach The Skies and Beyond</h2>
+          <p className="text-sm md:text-lg my-5 md:my-10">{state.brand.introduction}</p>
         </div>
       </div>
       <Spacer />
       <div className="flex flex-col items-center px-12 mb-10">
         <span>
-          <Image src="deco-1.svg" width={80} height={80} alt="" className="relative -left-8" />
-          <h1 className="font-extrabold text-5xl">Our Best Team</h1>
+          <Image src="deco-1.svg" width={80} height={80} alt="" className="relative -left-8 size-[60px] md:size-[80px]" />
+          <h1 className="font-extrabold text-3xl md:text-5xl">Our Best Team</h1>
         </span>
         <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-6 md:w-2/3">
           {
@@ -76,9 +76,9 @@ function TeamMember({
         width={author.profile_photo.width}
         height={author.profile_photo.height}
         alt={`${author.fullname}'s photo`}
-        className="rounded-full aspect-square object-cover p-2 w-[120px] md:w-[180px]" />
-      <span className="font-bold text-black">{author.fullname}</span>
-      <span className="text-sm">{author.headline}</span>
+        className="rounded-full aspect-square object-cover p-2 w-[100px] md:w-[180px]" />
+      <span className="font-bold text-black text-sm md:text-xl">{author.fullname}</span>
+      <span className="text-xs md:text-base">{author.headline}</span>
     </div>
   )
 }
