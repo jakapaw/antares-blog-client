@@ -34,28 +34,23 @@ export default function AboutUsPage() {
 
   return (
     <>
-      <div className="flex flex-col items-center md:mx-auto md:w-[75%] xl:w-[60%]">
-        <span className="p-8 self-start mb-5">
+      <div className="flex flex-col px-6 md:px-12">
+        <span className="py-8">
           <HomeNavigationBar />
         </span>
-        <Image
-          src={`${SERVER_URL}${state.brand.main_logo.url}`}
-          width={state.brand.main_logo.width}
-          height={state.brand.main_logo.height}
-          alt="Antares Logo"
-          className="w-3/4 max-w-[300px]" />
-        <span className="text-xl text-black font-bold">{state.brand.tagline}</span>
-        <div className="bg-black text-white px-12 py-5 my-5 text-sm font-medium">
-          <p>{state.brand.introduction}</p>
-          <div className="absolute max-md:right-[5%] md:left-[70%] w-12 h-12 rounded-full bg-secondary"></div>
+        <div className="bg-blue-950 px-14 py-6 text-white">
+          <h1 className="text-[80px] md:text-[110px] font-bold">Antares</h1>
+          <h2 className="text-2xl">Reach The Skies and Beyond</h2>
+          <p className="text-lg my-10">{state.brand.introduction}</p>
         </div>
       </div>
+      <Spacer />
       <div className="flex flex-col items-center px-12 mb-10">
         <span>
-          <Image src="deco-1.svg" width={60} height={60} alt="" className="relative -left-8" />
-          <h1 className="font-extrabold text-3xl">Best Team</h1>
+          <Image src="deco-1.svg" width={80} height={80} alt="" className="relative -left-8" />
+          <h1 className="font-extrabold text-5xl">Our Best Team</h1>
         </span>
-        <div className="mt-4 grid grid-cols-3 gap-6">
+        <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-6 md:w-2/3">
           {
             state.brand.authors.map((el, i) =>
               <TeamMember key={i} author={el} />
@@ -81,9 +76,9 @@ function TeamMember({
         width={author.profile_photo.width}
         height={author.profile_photo.height}
         alt={`${author.fullname}'s photo`}
-        className="rounded-full aspect-square object-cover p-2 w-[100px] md:w-[150px]" />
-      <span className="font-bold text-xs text-black">{author.fullname}</span>
-      <span className="text-xs">{author.headline}</span>
+        className="rounded-full aspect-square object-cover p-2 w-[120px] md:w-[180px]" />
+      <span className="font-bold text-black">{author.fullname}</span>
+      <span className="text-sm">{author.headline}</span>
     </div>
   )
 }
