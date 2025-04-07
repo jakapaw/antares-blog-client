@@ -39,8 +39,8 @@ export default function AboutUsPage() {
           <HomeNavigationBar />
         </span>
         <div className="bg-blue-950 px-14 py-6 text-white">
-          <h1 className="text-[50px] md:text-[110px] font-bold">Antares</h1>
-          <h2 className="text-lg md:text-2xl">Reach The Skies and Beyond</h2>
+          <h1 className="text-[62px] md:text-[110px] font-bold">Antares</h1>
+          <h2 className="text-lg md:text-2xl -mt-4">Reach The Skies and Beyond</h2>
           <p className="text-sm md:text-lg my-5 md:my-10">{state.brand.introduction}</p>
         </div>
       </div>

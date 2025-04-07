@@ -242,7 +242,8 @@ export async function getArticlesByCategory(categoryName: string) {
         fields: {
           0: "id",
           1: "title",
-          2: "updatedAt"
+          2: "updatedAt",
+          3: "slug"
         }
       }
     }

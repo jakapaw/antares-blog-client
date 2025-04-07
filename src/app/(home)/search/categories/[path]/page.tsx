@@ -14,6 +14,7 @@ export default async function CategoryPage({ params }: { params: { path: string 
       }
     });
   const articles: Map<string, Article[]> = new Map();
+  console.log(category!.articles);
   articles.set(category!.name, category!.articles!);
   return (
     <div className="flex flex-col h-svh">
