@@ -6,15 +6,15 @@ import Article from "@/model/article"
 import { notFound, redirect } from "next/navigation"
 import { Suspense } from "react"
 
-export default async function CategoryPage({ params }: { params: { path: string } }) {
-  const category = await getArticlesByCategory(params.path)
+export default async function CategoryPage({ params }: { params: Promise<{ path: string }> }) {
+  const path = (await params).path;
+  const category = await getArticlesByCategory(path)
     .catch(e => {
       if (typeof e == typeof notFound) {
         redirect("404");
       }
     });
   const articles: Map<string, Article[]> = new Map();
-  console.log(category!.articles);
   articles.set(category!.name, category!.articles!);
   return (
     <div className="flex flex-col h-svh">
