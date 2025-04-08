@@ -15,7 +15,7 @@ export default function HeaderSecondary() {
           <Image 
             src="/main_logo.svg" 
             alt="Antares Logo" 
-            width={100} height={100}/>
+            width={130} height={130}/>
         </Link>
         {searchBarOpen ?
           <div onBlur={() => setSearchBarOpen(false)}>

@@ -1,5 +1,15 @@
 #summary {
-  padding: 0 0.5rem 0 1.5rem;
+  margin-top: 2rem;
+  padding: 0 1rem 0 1rem;
+}
+
+#summary h1 {
+  margin-bottom: 10px;
+}
+
+#summary span {
+  font-size: 19px;
+  line-height: 2rem;
 }
 
 li {
@@ -12,8 +22,10 @@ ol {
 }
 
 li, ol {
-  font-size: small;
-  line-height: 2rem;
+  margin-left: 2.5rem;
+  font-size: 14px;
+  list-style-position: outside;
+  line-height: 1.75rem;
 }
 
 h1 {
@@ -29,14 +41,13 @@ h2 {
 }
 
 #article {
-  padding: 0 1rem 0 0;
-  padding-left: 1rem;
+  padding: 0 1rem 0 1rem;
 }
 
 p {
   padding: 0.75rem 0 0.75rem 0;
-  font-size: small;
-  line-height: 2rem;
+  font-size: 14px;
+  line-height: 1.75rem;
 }
 
 blockquote {
@@ -58,9 +69,10 @@ blockquote:first-child {
 
 code {
   display: block;
-  padding: 1rem;
-  margin: 1rem;
-  font-size: small;
+  padding: 4px;
+  margin: 6px 0 6px 0;
+  width: 100%;
+  font-size: 0.7rem;
   background: #000;
   color: ghostwhite;
   overflow-x: scroll;
@@ -80,8 +92,9 @@ code {
   h2 {
     font-size: 1.5rem;
   }
-  p, li {
-    font-size: 1.1rem;
+  p, li, ol {
+    font-size: 1.2rem;
+    line-height: 2rem;
   }
   code {
     font-size: 1rem;
