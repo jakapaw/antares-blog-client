@@ -85,7 +85,7 @@ export default function ArticlePage() {
         </div>
         </div>
         <div>
-          {state.article.content_summary != null ? 
+          {state.article.content_summary || state.article.content_summary != "" ? 
           <div id="summary">
             <hr className="border-2 mt-2" />
             <h1>Summary</h1>

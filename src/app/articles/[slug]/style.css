@@ -13,6 +13,7 @@ ol {
 }
 
 li, ol {
+  margin-left: 2.5rem;
   font-size: 14px;
   list-style-position: outside;
   line-height: 1.75rem;
@@ -59,9 +60,10 @@ blockquote:first-child {
 
 code {
   display: block;
-  padding: 1rem;
-  margin: 1rem;
-  font-size: 1rem;
+  padding: 4px;
+  margin: 6px 0 6px 0;
+  width: 100%;
+  font-size: 0.7rem;
   background: #000;
   color: ghostwhite;
   overflow-x: scroll;
