@@ -51,7 +51,7 @@ export default function AboutUsPage() {
           <Image src="deco-1.svg" width={80} height={80} alt="" className="relative -left-8 size-[60px] md:size-[80px]" />
           <h1 className="font-extrabold text-3xl md:text-5xl">Best Team</h1>
         </span>
-        <div className="mt-8 flex flex-wrap justify-center gap-6 md:w-1/2">
+        <div className="mt-8 flex flex-wrap justify-center items-center gap-5 md:w-[900px]">
           {
             state.brand.authors.map((el, i) =>
               <TeamMember key={i} author={el} />
@@ -82,7 +82,7 @@ function TeamMember({
   }
   
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center w-[100px] h-[150px] md:w-[200px] md:h-[300px]">
       <ProfilePhoto
         src={author.profile_photo?.url}
         width={author.profile_photo?.width}
@@ -91,7 +91,7 @@ function TeamMember({
         className="rounded-full aspect-square object-cover p-2 w-[100px] md:w-[180px]"
         onClick={() => navigate.push(`/authors/${author.username}`)} />
       <span className="font-bold text-black text-[10px] md:text-xl">{name}</span>
-      <span className="text-[9px] md:text-base">{author.headline}</span>
+      <span className="text-[9px] md:text-base text-wrap text-center">{author.headline}</span>
     </div>
   )
 }
