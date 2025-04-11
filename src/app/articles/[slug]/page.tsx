@@ -75,8 +75,8 @@ export default function ArticlePage() {
             <span className="text-xs md:text-base">{state.article?.authors.map((el, i) => <span key={i}>{el.fullname}<br/></span>)}</span>
             <span className="text-xs md:text-base">{state.article?.updatedAt.split("T").at(0)}</span>
           </div>
-          <div className="mt-2">
-            <span className="mr-3">tags: </span> 
+          <div>
+            <span className="mr-3 text-xs md:text-base">Tags: </span> 
             { state.article?.tags.map((el, i) =>
               <span key={i} className="bg-yellow-300 mr-1 md:mr-2 text-xs md:text-base px-2 py-1 rounded border-b-2 border-yellow-500 active:border-0">
                 { "#" + el.tag }
